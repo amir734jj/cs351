@@ -14,15 +14,7 @@ findFiles(__dirname, /lab\d+\/\w+\.pdf/g, 1)
             }
         })
 
-        files.sort((x, y) => {
-            if (x.name > y.name) {
-                return -1
-            } else if (x.name > y.name) {
-                return 1
-            } else {
-                return 0
-            }
-        })
+        files.sort((x, y) => x.name.localeCompare(y.name))
     })
 
 app.use(express.static('.'))
