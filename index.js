@@ -13,6 +13,16 @@ findFiles(__dirname, /lab\d+\/\w+\.pdf/g, 1)
                 url: path + '/' + props.file
             }
         })
+
+        files.sort((x, y) => {
+            if (x.name > y.name) {
+                return -1
+            } else if (x.name > y.name) {
+                return 1
+            } else {
+                return 0
+            }
+        })
     })
 
 app.use(express.static('.'))
