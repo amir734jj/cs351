@@ -9,7 +9,8 @@ if [ -z "$lab" ]; then
   done;
   tput reset;
 else
-  marp $1 --pdf -o ${line%.marp.md}.pdf;
+  count=1
+  marp $1 --pdf -o $lab/note.pdf;
 fi
 
 printf "\nCompleted building %d files ...\n\n" $count;
