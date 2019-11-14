@@ -103,5 +103,93 @@ static interface 	`Map.Entry<K,V>`: A map entry (key-value pair).
 
 ---
 
+# Bisection Search
+
+Or binary search is a method to find something in a sorted list
+
+
+---
+
+# Exercise: Bisection Search
+
+Recursive implementation:
+
+
+```java
+public int runBinarySearchRecursively(int[] sortedArray, int key, int low, int high) {
+    // TODO: return the index of an array where key is located at
+    //       else return -1
+    //
+    //
+}
+```
+
+---
+
+# Solution
+
+
+```java
+public int runBinarySearchRecursively(int[] sortedArray, int key, int low, int high) {
+    int middle = (low + high) / 2;
+         
+    if (high < low) {
+        return -1;
+    }
+ 
+    if (key == sortedArray[middle]) {
+        return middle;
+    } else if (key < sortedArray[middle]) {
+        return runBinarySearchRecursively(sortedArray, key, low, middle - 1);
+    } else {
+        return runBinarySearchRecursively(sortedArray, key, middle + 1, high);
+    }
+}
+```
+
+---
+
+# Exercise: Bisection Search
+
+Iterative implementation:
+
+```java
+public int runBinarySearchIteratively(int[] sortedArray, int key, int low, int high) {
+    // TODO: return the index of an array where key is located at
+    //       else return -1
+    //
+}
+```
+
+---
+
+# Solution
+
+
+```java
+public int runBinarySearchIteratively(int[] sortedArray, int key, int low, int high) {
+    int index = -1;
+     
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        if (key > sortedArray[mid]) {
+            low = mid + 1;
+        } else if (key < sortedArray[mid]) {
+            high = mid - 1;
+        } else if (sortedArray[mid] == key) {
+            index = mid;
+            break;
+        }
+    }
+
+    return index;          
+}
+```
+
+
+
+--- 
+
+
 # Lab exercise
-BST Search
+Binary Search
