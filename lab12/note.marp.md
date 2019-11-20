@@ -4,7 +4,7 @@ marp: true
 # HashTable ADT
 ---
 
-## HashMap vs. Hashtable in Java:
+## HashMap vs. HashTable in Java:
 
 - Both implement `Map` interface
     - Advantages: fast insertion, fast search.
@@ -12,13 +12,13 @@ marp: true
 
 ---
 
-## HashMap vs. Hashtable in Java (Cont.)
+## HashMap vs. HashTable in Java (Cont.)
 
-> 1. Hashtable is synchronized, whereas HashMap is not. This makes HashMap better for non-threaded applications, as unsynchronized Objects typically perform better than synchronized ones.
+> 1. HashTable is synchronized, whereas HashMap is not. This makes HashMap better for non-threaded applications, as unsynchronized Objects typically perform better than synchronized ones.
 
-> 2. Hashtable does not allow null keys or values. HashMap allows one null key and any number of null values.
+> 2. HashTable does not allow null keys or values. HashMap allows one null key and any number of null values.
 
-> 3. One of HashMap's subclasses is LinkedHashMap, so in the event that you'd want predictable iteration order (which is insertion order by default), you could easily swap out the HashMap for a LinkedHashMap. This wouldn't be as easy if you were using Hashtable.
+> 3. One of HashMap's subclasses is LinkedHashMap, so in the event that you'd want predictable iteration order (which is insertion order by default), you could easily swap out the HashMap for a LinkedHashMap. This wouldn't be as easy if you were using HashTable.
 
 [Source](https://stackoverflow.com/a/40878/1834787)
 
@@ -120,6 +120,7 @@ protected void rehash() {
 
 - The table is rehashed when its size exceeds this threshold
     - The value of this field is: `capacity * loadFactor`
+        -  the default value of `loadFactor` is $0.75$
 - It's needed to prevent repeat collisions    
 
 ---
@@ -246,6 +247,27 @@ for (int i = hash(key), j = 1; table[i] != null; i = (hash(key) + j * hash2(key)
 // We found a free spot
 table[i] = new Entry<K, V>(key, value);
 ```
+
+---
+
+# Miscellaneous: collision resolving technique
+### Robin Hood hashing
+
+It's a technique to help us with big-O (or worst-case).
+ 
+> The idea is that a new key may displace a key already inserted, if its probe count is larger than that of the key at the current position. The net effect of this is that it reduces worst case search times in the table.
+
+
+>> In the context of a hash table, the rich are those items that are located very close to their hash index, and the poor items are located far away.
+
+[Source](https://andre.arko.net/2017/08/24/robin-hood-hashing/)
+
+--- 
+# Robin Hood hashing (Cont.)
+
+- We need to store count of probing it took for an existing entry
+    - Replace if `j > table[i].getProbingCount()`
+        -  Then continue with probing but with `table[i]`
 
 ---
 # Lab exercise
