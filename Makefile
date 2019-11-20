@@ -12,5 +12,13 @@ build:
 publish:
 	./scripts/publish.sh
 
+%.new:
+	mkdir -p $*;
+	echo "   \
+---       \
+marp: true\
+---       \
+" > $.marp.md
+
 clean:
 	rm -i lab*/*.pdf >/dev/null

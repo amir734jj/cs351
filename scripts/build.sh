@@ -8,9 +8,8 @@ if [ -z "$lab" ]; then
       count=$(($count+1));
   done;
   tput reset;
+  printf "\nCompleted building %d files ...\n" $count;
 else
-  count=1
   marp $1 --pdf -o $lab/note.pdf;
+  printf "\nCompleted building %s\n" $lab;
 fi
-
-printf "\nCompleted building %d files ...\n\n" $count;
