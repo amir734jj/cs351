@@ -47,11 +47,11 @@ private int hash(Key key) {
 
 # Answer
 
-0x7FFFFFFF is 0111 1111 1111 1111 1111 1111 1111 1111 : all 1 except the sign bit.
+`0x7FFFFFFF` is `0111 1111 1111 1111 1111 1111 1111 1111` : all 1 except the sign bit.
 
-(hash & 0x7FFFFFFF) will result in a positive integer.
+`(hash & 0x7FFFFFFF)` will result in a positive integer.
 
-(hash & 0x7FFFFFFF) % table.length will be in the range of the tab length.
+`(hash & 0x7FFFFFFF) % table.length` will be in the range of the tab length.
 
 ---
 
@@ -59,7 +59,7 @@ private int hash(Key key) {
 
 What does a `threshold` represent and why is it needed?
 
-```
+```java
 void rehash() {
     int oldCapacity = table.length;
     Entry<?,?>[] oldMap = table;
@@ -135,7 +135,7 @@ protected void rehash() {
 
 What are the common implementations for HashTable's buckets?
 
-- Separate chaining with linked lists $O(n)$
+- (**Chaining**) Separate chaining with linked lists $O(n)$
     - Buckets are just LinkedLists of entries
         - Look through the bucket to find an entry with matching hash
             - If any then update entry's value property
@@ -146,23 +146,20 @@ What are the common implementations for HashTable's buckets?
 
 # Addressing Techniques (Cont.)
 
-- Separate chaining with self-balancing tree $O(log n)$
+- (**Chaining**) Separate chaining with self-balancing tree $O(log \ n)$
     - Similar to previous except using a tree hence faster lookup but more complexity
 
 ---
 
 # Addressing Techniques (Cont.)
-## Open addressing
-
-These are techniques to resolve collisions
-
-- Linear probing:
-    - upon collision, add $1$ to the hash(key) and then take modulo to find new index
-    - repeat above if we there is still a collision
-- Quadratic probing:
-    - upon collision, $\text{hash}(key) + i * i$ where $i \in \{1 ... n\}$
-- Double hashing: upon collision, add $i \in {0, n}$ to the hash(key) and then take modulo
-    - upon collision, $\text{hash}(key) + i * \text{hash2}(key)$ where $i \in \{1 ... n\}$
+- (**Open addressing**) These are techniques to resolve collisions
+    - Linear probing:
+        - upon collision, $\text{hash}(key) + i$ where $i \in \{1 ... n\}$
+        - repeat above if we there is still a collision
+    - Quadratic probing:
+        - upon collision, $\text{hash}(key) + i * i$ where $i \in \{1 ... n\}$
+    - Double hashing: upon collision, add $i \in {0, n}$ to the hash(key) and then take modulo
+        - upon collision, $\text{hash}(key) + i * \text{hash2}(key)$ where $i \in \{1 ... n\}$
 
 
 ---
@@ -200,6 +197,7 @@ for (int i = hash(key); table[i] != null; i = (i + 1) % table.length) {
         return;
     }
 }
+// We found a free spot
 table[i] = new Entry<K, V>(key, value);
 ```
 
@@ -215,12 +213,14 @@ Let's implement quadratic probing give:
 # Solution
 
 ```java
-for (int i = hash(key), j = 0; table[i] != null; i = (hash(key) + j * j) % table.length, j++) {
+for (int i = hash(key), j = 1; table[i] != null; i = (hash(key) + j * j) % table.length, j++) {
+    // Update if there is already a key/value pair in the map
     if (table[i].getKey().equals(key)) {
         table[i] = new Entry<K, V>(key, value);
         return;
     }
 }
+// We found a free spot
 table[i] = new Entry<K, V>(key, value);
 ```
 
@@ -236,12 +236,14 @@ Let's implement double hashing give:
 # Solution
 
 ```java
-for (int i = hash(key), j = 0; table[i] != null; i = (hash(key) + j * hash2(key)) % table.length, j++) {
+for (int i = hash(key), j = 1; table[i] != null; i = (hash(key) + j * hash2(key)) % table.length, j++) {
+    // Update if there is already a key/value pair in the map
     if (table[i].getKey().equals(key)) {
         table[i] = new Entry<K, V>(key, value);
         return;
     }
 }
+// We found a free spot
 table[i] = new Entry<K, V>(key, value);
 ```
 
