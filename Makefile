@@ -14,11 +14,10 @@ publish:
 
 %.new:
 	mkdir -p $*;
-	echo "   \
----       \
-marp: true\
----       \
-" > $.marp.md
+	echo "---\n\
+marp: true\n\
+---\n\
+" > $*/note.marp.md
 
 clean:
 	rm -i lab*/*.pdf >/dev/null
