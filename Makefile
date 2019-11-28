@@ -17,6 +17,8 @@ publish:
 	echo "---\n\
 marp: true\n\
 ---\n\
+
+# Title!
 " > $*/note.marp.md
 
 clean:
