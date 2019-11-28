@@ -63,6 +63,11 @@ We can sacrifice the $O(1)$ to get a better space efficiency by using "Adjacency
 
 [Source](https://en.wikipedia.org/wiki/Adjacency_list)
 
+Other implementations include:
+  - "edge list" implementation where we have a list of `Edge(Node, Node)`
+  - combination of edge list and node list where we have list of `Edge(Node's Id, Node's Id)` and `List<Node>`
+
+
 ---
 
 # Warm up
