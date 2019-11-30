@@ -168,6 +168,8 @@ visited: { 1          } queue: {      }   // dequeue 1 and mark 1 as visited
 visited: { 1          } queue: { 4    }   // enqueue un-visited neighbors of 1
 visited: { 1, 4       } queue: {      }   // mark 4 as visited
 visited: { 1, 4       } queue: { 2, 3 }   // enqueue un-visited neighbors of 4
+                                          // [2, 3] <- enqueue(2)
+                                          //        <- enqueue(3) 
 visited: { 1, 4, 2    } queue: { 3    }   // dequeue 2 and mark 2 as visited
 visited: { 1, 4, 2, 3 } queue: {      }   // dequeue 3 mark 3 as visited
 ```
@@ -238,6 +240,8 @@ visited: { 1          } stack: {      }   // pop 1 and mark 1 as visited
 visited: { 1          } stack: { 4    }   // push un-visited neighbors of 1
 visited: { 1, 4       } stack: {      }   // mark 4 as visited
 visited: { 1, 4       } stack: { 2, 3 }   // push un-visited neighbors of 4
-visited: { 1, 4, 2    } stack: { 3    }   // pop 2 and mark 2 as visited
+                                          // [2, 3] <- push(2)
+                                          //        <- push(3) 
+visited: { 1, 4, 3    } stack: { 2    }   // pop 3 and mark 3 as visited
 visited: { 1, 4, 2, 3 } stack: {      }   // pop 3 mark 3 as visited
 ```
