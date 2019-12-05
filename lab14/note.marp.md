@@ -178,5 +178,61 @@ def heapSort(arr):
 
 ---
 
+# Exercise
+
+```java
+private <E> void insert(E e, E[] arr, int count, Comparator<E> comp) {
+    // TODO: handle any special case here
+
+
+    for (int i = 0; i < count; i++) {
+        // TODO: prepare the array so that new element `e` could
+        //       be inserted at `i`
+        //
+        //
+        
+        arr[i] = e;
+        break;
+    }
+}
+```
+
+---
+
+# Solution
+
+```java
+private <E> void insert(E e, E[] arr, int count, Comparator<E> comp) {
+    if (count == 0) {
+        arr[0] = e;
+        return;
+    }
+
+    for (int i = 0; i < count; i++) {
+        if (comp.compare(arr[i], e) >= 0) {
+            // we found an element that is >= to e
+            // we want to add new element at index i, currently arr[i] is occupied
+            // by larger element, so we need to adjust
+        } else if (i + 1 == count) {
+            // this is the last iteration of the loop so we want to add element at i + 1
+            i++;
+        } else {
+            // keep looping to find an element
+            continue;
+        }
+
+        // we need to move elements to the right to make space
+        for (int j = count; j > i; j--) {
+            arr[j] = arr[j - 1];
+        }
+
+        arr[i] = e;
+        break;
+    }
+}
+```
+
+---
+
 # Lab Exercise
 ## MergeSort
